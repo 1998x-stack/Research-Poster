@@ -4,7 +4,7 @@
 Title → 8-second takeaway → Problem → Why it matters → Method (dominant figure) → Evidence (2–3 visualized numbers) → Limitations → Citation/QR. Use one concept per section, large labels and one intentional focal point.
 
 ## Recommended format
-- Default **48×36 in, landscape**, print PDF (3:4 aspect), configurable when venue specifies A0/A1 or portrait.
+- Default **48×36 in, landscape**, print PDF (4:3 aspect), configurable when venue specifies A0/A1 or portrait.
 - Safe margin 0.9–1.2 in; gutter 0.4–0.65 in.
 - Hybrid 3-column grid: **~25% context, 45% method, 25% evidence**, remaining gutters.
 - Visual hierarchy: title ~95–120 pt; key takeaway 40–55 pt; section 28–36 pt; core content 20–28 pt; footnote 14–18 pt at full poster size.

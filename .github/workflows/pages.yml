@@ -8,6 +8,7 @@ on:
       - "scripts/**"
       - "site/**"
       - "requirements-render.txt"
+      - ".agents/skills/research-poster/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 permissions:
@@ -45,6 +46,19 @@ jobs:
           fi
       - name: Verify source and rendered assets
         run: python scripts/validate_catalog.py --strict-assets
+      - name: Preflight all published posters
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+          for metadata in Path("posters").glob("*/*/*/poster.json"):
+              if json.loads(metadata.read_text())["status"] == "published":
+                  subprocess.run([sys.executable,
+                      ".agents/skills/research-poster/scripts/preflight.py",
+                      str(metadata.parent), "--strict"], check=True)
+          PY
       - name: Build the GitHub Pages gallery
         run: python scripts/build_site.py --output _site
       - name: Configure GitHub Pages

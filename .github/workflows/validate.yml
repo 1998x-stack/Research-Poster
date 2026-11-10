@@ -15,6 +15,20 @@ jobs:
         with:
           python-version: "3.11"
       - run: python scripts/validate_catalog.py
+      - run: python -m unittest discover -s tests -v
+      - name: Preflight published metadata and available assets
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+          for metadata in Path("posters").glob("*/*/*/poster.json"):
+              if json.loads(metadata.read_text())["status"] == "published":
+                  subprocess.run([sys.executable,
+                      ".agents/skills/research-poster/scripts/preflight.py",
+                      str(metadata.parent)], check=True)
+          PY
       - run: python scripts/build_site.py --output _site
       - run: |
           python - <<'PY'
