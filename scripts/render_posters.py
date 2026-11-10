@@ -14,11 +14,13 @@ def main():
         run(sys.executable,str(source))
         pptx=base/"poster.pptx";pdf=base/"poster.pdf";preview=base/"preview.png"
         if not pptx.is_file() or pptx.stat().st_size<1024:raise RuntimeError("PPTX missing/empty")
-        if not pdf.exists():
-            run("libreoffice","-env:UserInstallation=file:///tmp/lo_research_poster","--headless","--convert-to","pdf","--outdir",str(base),str(pptx))
+        # Rebuild derived assets from the latest PPTX, even when older files
+        # were already committed to this repository. Never serve stale previews.
+        pdf.unlink(missing_ok=True)
+        preview.unlink(missing_ok=True)
+        run("libreoffice","-env:UserInstallation=file:///tmp/lo_research_poster","--headless","--convert-to","pdf","--outdir",str(base),str(pptx))
         if not pdf.exists() or pdf.stat().st_size<1024:raise RuntimeError("PDF missing/empty")
-        if not preview.exists():
-            run("pdftoppm","-f","1","-l","1","-singlefile","-scale-to","2200","-png",str(pdf),str(base/"preview"))
+        run("pdftoppm","-f","1","-l","1","-singlefile","-scale-to","2200","-png",str(pdf),str(base/"preview"))
         if not preview.exists() or preview.stat().st_size<1024:raise RuntimeError("PNG missing/empty")
         count+=1
     print("Rendered",count,"poster(s)")
