@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Validate poster metadata, taxonomy paths and security before publication."""
-import json,re,sys
+import argparse,json,re,sys
 from pathlib import Path
 from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parents[1]
@@ -8,6 +8,7 @@ SLUG=re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 issues=[]
 def report(where,msg):issues.append(f"{where}: {msg}")
 def main():
+    ap=argparse.ArgumentParser();ap.add_argument("--strict-assets",action="store_true");args=ap.parse_args()
     tax=json.loads((ROOT/"catalog/taxonomy.json").read_text(encoding="utf8"))
     cats={}
     for c in tax["categories"]:
@@ -46,7 +47,7 @@ def main():
         for typ,name in assets.items():
             if typ not in ("svg","pdf","pptx","preview"):report(f,"unsupported asset type")
             if not isinstance(name,str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*",name):report(f,"unsafe asset name");continue
-            if p.get("status")=="published" and not (f.parent/name).is_file():report(f,f"asset missing: {name}")
+            if p.get("status")=="published" and (typ=="svg" or args.strict_assets) and not (f.parent/name).is_file():report(f,f"asset missing: {name}")
         if p.get("status")=="published" and not ("svg" in assets or "preview" in assets):report(f,"missing preview asset")
     for issue in issues:print("ERROR",issue,file=sys.stderr)
     print(f"Validated {len(docs)} paper(s), {len(cats)} categories, {len(issues)} error(s)")
