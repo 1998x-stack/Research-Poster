@@ -1,13 +1,7 @@
 #!/usr/bin/env python3
-"""Create a non-destructive draft poster in the canonical CS taxonomy.
-
-Example:
- python scripts/new_poster.py --title 'FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness' \
-   --category machine-learning --subcategory optimization --year 2022 --venue NeurIPS \
-   --authors 'Tri Dao; Daniel Y. Fu; Stefano Ermon; Atri Rudra; Christopher Ré' \
-   --url https://arxiv.org/abs/2205.14135
-"""
+"""Create a non-destructive draft poster in the canonical CS taxonomy."""
 from __future__ import annotations
+
 import argparse
 from datetime import date
 import json
@@ -16,6 +10,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
+TEMPLATES = ROOT / ".agents/skills/research-poster/assets/templates"
 SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
@@ -24,66 +19,70 @@ def slugify(value: str) -> str:
     return value[:90].strip("-")
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser(description=__doc__)
-    for x in ('title', 'category', 'subcategory', 'venue', 'authors', 'url'):
-        ap.add_argument('--' + x, required=True)
-    ap.add_argument('--year', type=int, required=True)
-    ap.add_argument('--slug', help='Explicit ASCII slug (recommended for non-English titles)')
-    ap.add_argument('--version', default='author-provided / to verify')
-    ap.add_argument('--dry-run', action='store_true')
-    args = ap.parse_args()
+def apply_template(name: str, title: str, url: str) -> str:
+    source = (TEMPLATES / name).read_text(encoding="utf-8")
+    return (source.replace("{{TITLE}}", title)
+                  .replace("{{SOURCE_URL}}", url))
 
-    taxonomy = json.loads((ROOT / 'catalog/taxonomy.json').read_text(encoding='utf-8'))
-    valid = {(c['id'], s['id']) for c in taxonomy['categories'] for s in c['subfields']}
-    if (args.category, args.subcategory) not in valid:
-        ap.error('Unknown taxonomy path; inspect catalog/taxonomy.json')
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    for field in ("title", "category", "subcategory", "venue", "authors", "url"):
+        parser.add_argument("--" + field, required=True)
+    parser.add_argument("--year", type=int, required=True)
+    parser.add_argument("--slug", help="Explicit ASCII slug (for non-English titles)")
+    parser.add_argument("--version", default="author-provided / to verify")
+    parser.add_argument("--dry-run", action="store_true")
+    args = parser.parse_args()
+
+    taxonomy = json.loads((ROOT / "catalog/taxonomy.json").read_text(encoding="utf-8"))
+    allowed = {(cat["id"], sub["id"])
+               for cat in taxonomy["categories"] for sub in cat["subfields"]}
+    if (args.category, args.subcategory) not in allowed:
+        parser.error("Unknown taxonomy path; inspect catalog/taxonomy.json")
     slug = args.slug or slugify(args.title)
     if not SLUG.fullmatch(slug):
-        ap.error('Provide an ASCII lower-kebab-case --slug')
-    parsed = urlsplit(args.url)
-    if parsed.scheme != 'https' or not parsed.netloc or parsed.username:
-        ap.error('--url must be a public HTTPS paper URL')
+        parser.error("Provide an ASCII lower-kebab-case --slug")
+    url = urlsplit(args.url)
+    if url.scheme != "https" or not url.netloc or url.username:
+        parser.error("--url must be a public HTTPS paper URL")
     if not 1940 <= args.year <= date.today().year + 1:
-        ap.error('Year is out of expected range')
-    authors = [x.strip() for x in args.authors.split(';') if x.strip()]
+        parser.error("Year is out of expected range")
+    authors = [value.strip() for value in args.authors.split(";") if value.strip()]
     if not authors:
-        ap.error('Provide semicolon-separated authors')
+        parser.error("Provide semicolon-separated authors")
 
-    destination = ROOT / 'posters' / args.category / args.subcategory / slug
-    if destination.exists():
-        ap.error(f'Poster already exists; refusing overwrite: {destination}')
-    print('Scaffolding:', destination.relative_to(ROOT))
+    dest = ROOT / "posters" / args.category / args.subcategory / slug
+    if dest.exists():
+        parser.error(f"Paper already exists; refusing overwrite: {dest}")
+    print("Scaffolding:", dest.relative_to(ROOT))
     if args.dry_run:
         return
-    destination.mkdir(parents=True)
+    dest.mkdir(parents=True)
     data = {
-        'id': slug, 'title': args.title, 'subtitle': 'TODO: evidence-backed contribution',
-        'authors': authors, 'year': args.year, 'venue': args.venue,
-        'category': args.category, 'subcategory': args.subcategory,
-        'tags': [], 'summary': 'TODO: source-verified summary',
-        'takeaway': 'TODO: single defensible takeaway',
-        'method': 'TODO: diagram with provenance',
-        'limitations': 'TODO: primary-source limitations',
-        'source': {'url': args.url, 'version': args.version,
-                   'citation': f'{authors[0]} et al. ({args.year}). {args.title}. {args.venue}.'},
-        'assets': {'svg': 'poster.svg'},
-        'status': 'draft', 'featured': False, 'added': date.today().isoformat()
+        "id": slug, "title": args.title, "subtitle": "TODO: evidence-backed contribution",
+        "authors": authors, "year": args.year, "venue": args.venue,
+        "category": args.category, "subcategory": args.subcategory, "tags": [],
+        "summary": "TODO: source-verified summary",
+        "takeaway": "TODO: single defensible takeaway",
+        "method": "TODO: diagram with provenance",
+        "limitations": "TODO: primary-source limitations",
+        "source": {
+            "url": args.url, "version": args.version,
+            "citation": f"{authors[0]} et al. ({args.year}). {args.title}. {args.venue}."
+        },
+        "assets": {"svg": "poster.svg"},
+        "status": "draft", "featured": False, "added": date.today().isoformat()
     }
-    (destination / 'poster.json').write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
-    (destination / 'evidence.md').write_text(
-        f'# Evidence ledger: {args.title}\n\nPrimary source: {args.url}\n\n'
-        '| Claim | Paper page / table | Experimental setting | Caveat |\n'
-        '| --- | --- | --- | --- |\n'
-        '| TODO | TODO | TODO | TODO |\n', encoding='utf-8')
-    (destination / 'brief.md').write_text(
-        f'# Poster brief: {args.title}\n\n'
-        '- Main claim: TODO\n- Target audience: TODO\n- Central figure: TODO\n'
-        '- Metrics with baselines: TODO\n- Limitations: TODO\n'
-        '- Desired visual style: hybrid\n- Export: SVG, PDF, PPTX, PNG\n', encoding='utf-8')
-    print('Draft only: it will not appear on Pages until status=published and assets exist.')
-    print('Next: read .agents/skills/research-poster/SKILL.md; then validate and build.')
+    (dest / "poster.json").write_text(
+        json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (dest / "evidence.md").write_text(
+        apply_template("claim-ledger.md", args.title, args.url), encoding="utf-8")
+    (dest / "brief.md").write_text(
+        apply_template("poster-storyboard.md", args.title, args.url), encoding="utf-8")
+    print("Draft only: not shown on Pages until the paper and assets are verified.")
+    print("Next: follow .agents/skills/research-poster/SKILL.md and preflight.py")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

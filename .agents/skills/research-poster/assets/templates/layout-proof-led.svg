@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">Proof-led research poster wireframe</title>
+<desc id="desc">A formal-method and algorithms layout with prominent theorem and assumptions, a proof flow and a section for limitations and implications.</desc>
+<rect width="1200" height="900" fill="#f6f8f7"/>
+<rect width="1200" height="170" fill="#112b3c"/>
+<g font-family="Arial,sans-serif"><text x="54" y="59" font-size="18" fill="#a4e2da">RESEARCH POSTER  /  PROOF-LED WIREFRAME</text><text x="54" y="115" font-size="44" font-weight="700" fill="#fff">PAPER TITLE / THEOREM</text><text x="54" y="147" font-size="20" fill="#d5e4e6">Authors · Venue · Year · Source</text></g>
+<rect x="35" y="193" width="1130" height="166" rx="17" fill="#e0f2ed"/>
+<text x="58" y="232" fill="#116b69" font-family="Arial,sans-serif" font-size="20">STATEMENT / ASSUMPTIONS</text>
+<text x="58" y="279" fill="#112b3c" font-family="Arial,sans-serif" font-weight="700" font-size="29">Write the precise claim and all its hypotheses</text>
+<text x="58" y="319" fill="#58747e" font-family="Arial,sans-serif" font-size="21">Never omit constraints, quantifiers, input model, or asymptotic regime</text>
+<rect x="35" y="380" width="348" height="395" rx="15" fill="white" stroke="#d6e1e4" stroke-width="2"/>
+<rect x="400" y="380" width="432" height="395" rx="15" fill="white" stroke="#74b9af" stroke-width="3"/>
+<rect x="849" y="380" width="316" height="395" rx="15" fill="white" stroke="#d6e1e4" stroke-width="2"/>
+<g font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#112b3c"><text x="58" y="424">Problem definition</text><text x="424" y="424">Proof idea / reduction</text><text x="872" y="424">Consequences</text></g>
+<g font-family="Arial,sans-serif" font-size="19" fill="#67828b"><text x="58" y="468">Formal setting</text><text x="58" y="508">Prior bounds</text><text x="424" y="484">State invariant / key lemma</text><text x="424" y="531">Explain each implication</text><text x="872" y="468">Tightness / comparison</text><text x="872" y="508">Counterexamples</text></g>
+<rect x="35" y="795" width="1130" height="82" rx="12" fill="#e9eff0"/>
+<text x="58" y="832" fill="#112b3c" font-family="Arial,sans-serif" font-size="22" font-weight="700">Scope of theorem / open questions / full citation</text>
+<text x="58" y="859" fill="#59717d" font-family="Arial,sans-serif" font-size="17">Proof sketch is a pedagogical simplification, not a replacement for the original proof.</text>
+</svg>

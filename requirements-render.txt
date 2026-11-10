@@ -1,2 +1,3 @@
-python-pptx>=1.0,<2
-qrcode[pil]>=8,<9
+# Compatibility entrypoint for the repository's poster-rendering CI.
+# The portable skill owns the Python rendering dependency versions.
+-r .agents/skills/research-poster/requirements.txt
