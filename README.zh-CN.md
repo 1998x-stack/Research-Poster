@@ -1,82 +1,157 @@
-# Research Poster · 计算机科学论文海报知识库
+<div align="center">
 
-> 将学术论文转化为**可核验、可编辑、可复现、可浏览**的学术会议 Research Poster。
+# Research Poster
 
-[English README](README.md) · [海报画廊](https://1998x-stack.github.io/Research-Poster/) · [完整 SKILL](.agents/skills/research-poster/SKILL.md) · [分类体系](catalog/taxonomy.json)
+### 从复杂论文到清晰、可核验的学术视觉论证
 
-## 项目目标
+**开源学术海报工作室 · 跨 Agent Skill · 持续增长的计算机科学论文画廊**
 
-Research Poster 不只是存储 PDF 的文件夹，而是一个长期演进的计算机科学论文海报仓库：**原始论文 → 证据清单 → 研究叙事 → 技术图表 → SVG/PPTX/PDF/PNG → 自动化质量检查 → GitHub Pages 画廊**。
+[浏览海报画廊](https://1998x-stack.github.io/Research-Poster/) · [Research Poster Skill](.agents/skills/research-poster/SKILL.md) · [计算机科学分类](catalog/taxonomy.json) · [English](README.md)
 
-- **科学性**：每个指标应能追溯到原论文的特定版本、章节和表格；保留重要局限，不混淆不同版本的数据。
-- **设计性**：采用视觉叙事型研究海报；突出一个核心思想、一张方法架构图和少量准确的实验结果。
-- **可编辑**：保留原生 PPTX、SVG 和生成脚本，而不只是一个不可修改的截图。
-- **可扩展**：按学科和子领域归类，新增 `poster.json` 即自动加入画廊索引，不需要手动维护卡片。
-- **跨 Agent**：标准 SKILL 支持 Codex、Claude Code、OpenCode、Pi。
+[![Validate posters](https://github.com/1998x-stack/Research-Poster/actions/workflows/validate.yml/badge.svg)](https://github.com/1998x-stack/Research-Poster/actions/workflows/validate.yml)
+[![Publish gallery](https://github.com/1998x-stack/Research-Poster/actions/workflows/pages.yml/badge.svg)](https://github.com/1998x-stack/Research-Poster/actions/workflows/pages.yml)
+[![Agent Skills](https://img.shields.io/badge/Agent_Skills-compatible-137F81)](https://agentskills.io/specification)
 
-## 首篇示例：Attention Is All You Need
+</div>
 
-路径：[`posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/`](posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/)。
+---
 
-包含文件：`poster.svg`（可直接预览）、`poster.pptx`（可编辑）、`poster.pdf`（高清印刷）、`preview.png`（缩略图）、`make_poster.py`（源代码）、`poster.json`（元数据）、`evidence.md`（证据清单）。
+## 项目定位
 
-原论文采用 NeurIPS 2017 正式版本；WMT14 英德 28.4 BLEU、英法 41.0 BLEU。后续 arXiv 修订中英法 41.8 BLEU 的差异必须单独标注。
+Research Poster 不是 Transformer 海报的专用仓库，而是**可长期扩充的计算机科学研究海报知识库与可复现生产工具链**。将论文转化为会议海报，并非缩短摘要，而是提炼一个有证据支撑的研究主张，以清楚的视觉层级展示核心方法、实验结果与局限。
 
-## 一段 Prompt 自动制作新的论文海报
+| 核心能力 | 交付标准 |
+| --- | --- |
+| 可靠科研证据 | 官方来源、版本、章节/表格、实验设置、基线和局限可追溯 |
+| 领域适配设计 | AI/视觉、系统、算法理论、安全、HCI、机器人采用不同的图形叙事 |
+| 可编辑与可复现 | 生成源、SVG、PowerPoint、可打印 PDF 和缩略图 |
+| 多 Agent 共享 Skill | Codex、Claude Code、OpenCode、Pi 统一读取规范 |
+| 动态论文画廊 | 元数据驱动分类、搜索、独立论文页与 GitHub Pages 发布 |
 
-将以下内容粘贴到使用该仓库的 Agent 中：
+## 海报画廊：从首篇论文开始
 
-```text
-阅读 .agents/skills/research-poster/SKILL.md，完整遵守 references 中的科研
-证据、可视化、排版、导出和发布规范。基于下面的论文 URL/PDF，首先验证
-官方来源、版本、作者、数据集与实验数据，生成 claim/evidence ledger；
-然后在 catalog/taxonomy.json 中选择正确类别，建立独立的论文目录；
-设计 48×36 英寸学术会议海报，要求方法架构为视觉中心、结果清晰且有
-局限性说明。输出 editable PPTX、打印 PDF、SVG 和预览 PNG；创建
-poster.json、源脚本和 evidence.md；执行仓库验证和画廊构建；
-只在通过检查后提交更改，不覆盖已有论文。
-论文：<在这里粘贴 URL/PDF>
-```
+<a href="https://1998x-stack.github.io/Research-Poster/"><img alt="Attention Is All You Need 学术海报示例" src="posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/preview.png" width="840"></a>
 
-## 快速开始
+**首篇案例：** [Attention Is All You Need](posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/)（Vaswani 等，NeurIPS 2017）。它展示了整个制作流程，并不限定后续收录内容。当前案例依据 NeurIPS 2017 论文版本；与后续 arXiv 修订版本存在差异的数据必须独立说明。[查看证据记录](posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/evidence.md)。
 
-```bash
+后续将持续纳入机器学习、计算机视觉、分布式系统、数据库、网络、安全、算法理论、软件工程、人机交互、机器人及交叉计算研究。目录分类以 [`catalog/taxonomy.json`](catalog/taxonomy.json) 为准；空分类目录是预留位置，不表示已有海报。
+
+## 针对不同论文使用不同海报范式
+
+| 论文类型 | 重点视觉 | 必须记录的验证信息 |
+| --- | --- | --- |
+| AI / ML / CV | 网络结构、训练/推理路径、消融实验 | 数据集、模型变体、基线、算力、指标 |
+| 系统 / 网络 / 数据库 | 系统拓扑、关键路径、性能与权衡 | 负载、硬件、延迟分位数、故障条件 |
+| 算法 / 理论 / 密码学 | 不变量、证明直觉、归约、复杂度 | 前提、定理边界、复杂度条件、威胁模型 |
+| HCI / 无障碍 | 用户研究流程、任务、结果与置信度 | 样本、协议、不确定性、伦理 |
+| 机器人 | 感知—策略—执行闭环 | 环境、成功率口径、安全边界 |
+| 交叉研究 | 领域任务—计算方法—验证结果 | 领域数据、外推边界、局限性 |
+
+具体参见 [各类论文的设计指南](.agents/skills/research-poster/references/paper-archetypes.md) 和 [版式模板](.agents/skills/research-poster/assets/templates/)。
+
+## 一段 Prompt 生成下一篇海报
+
+在已经检出本仓库的 Coding Agent 中粘贴：
+
+~~~text
+阅读 AGENTS.md、.agents/skills/research-poster/SKILL.md 及其相关 references。
+将 <论文 URL 或本地 PDF> 制作成可复现的专业学术会议海报。
+先核验官方论文、作者、会议和具体版本；建立 evidence.md，记录
+每个重要主张的页码、表格、实验条件与限制；根据研究领域选择
+恰当的叙事与版式，不要机械套用 Transformer 风格；在
+catalog/taxonomy.json 中选定分类，新建独立论文目录，输出
+编辑源、SVG、PPTX、PDF、PNG 和 poster.json。
+运行独立海报预检、分类校验、单元测试与静态网站构建，检查
+打印可读性和网页展示效果。不得虚构数据、覆盖已有海报或在
+未验证部署时声称网站已上线。提交可审查的改动。
+~~~
+
+该 Skill 可以拷贝到其他项目使用，**需要整体复制** `.agents/skills/research-poster/`，包括 `references/`、`assets/templates/`、`scripts/` 与 `requirements.txt`，不能只复制入口文件。仓库根目录的 `scripts/` 则负责本知识库自己的数据和网站构建。
+
+## 本地快速开始
+
+**基础环境：** Python 3.10+；分类、元数据、静态站点工具仅使用标准库。
+
+~~~bash
 git clone https://github.com/1998x-stack/Research-Poster.git
 cd Research-Poster
 
-# 先看学科和子领域
+# 查看现有学科和细分方向
 cat catalog/taxonomy.json
 
-# 为下一篇论文创建“草稿占位目录”，不会覆盖已有文件
-python scripts/new_poster.py --title "Paper Title" \
-  --category artificial-intelligence \
-  --subcategory natural-language-processing \
-  --year 2026 --venue "Conference" \
-  --authors "Author One; Author Two" \
+# 为一篇论文创建不会覆盖已有内容的草稿
+python scripts/new_poster.py \
+  --title "Example Research Paper" \
+  --category computer-systems --subcategory distributed-systems \
+  --year 2026 --venue "Example Conference" \
+  --authors "First Author; Second Author" \
   --url "https://example.org/paper"
 
-# 验证内容并在本地生成画廊
+# 校验、测试、本地网站预览
 python scripts/validate_catalog.py
+python -m unittest discover -s tests -v
 python scripts/build_site.py --output _site
 python -m http.server 8000 --directory _site
-```
+~~~
 
-海报仍处于 `draft` 时不显示在公开网站。只有图形文件、引文和元数据准备完毕且 `status=published` 时才会被收录。
+需要生成可编辑 PPTX、PDF、PNG 时，再安装可选 Python 依赖及系统级 LibreOffice / Poppler：
 
-## 计算机科学分层分类
+~~~bash
+python -m pip install -r requirements-render.txt
+python scripts/render_posters.py
 
-当前一级领域：Artificial Intelligence、Machine Learning、Algorithms & Theory、Computer Systems、Data & Information、Networks、Security & Privacy、Software Engineering、Human–Computer Interaction、Graphics & Visualization、Robotics、Interdisciplinary Computing。每个一级领域细分多个子领域，空目录保留 `.gitkeep`。
+python .agents/skills/research-poster/scripts/preflight.py \
+  posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need --strict
+python scripts/validate_catalog.py --strict-assets
+~~~
 
-存储规范：`posters/<一级领域>/<二级领域>/<paper-slug>/`。同一论文只存一个主目录；交叉研究主题使用 `tags`，避免重复资产。
+`--strict` 模式需要 Poppler 的 `pdfinfo` 验证单页 PDF；程序检查不等于打印尺寸与排版的人工目视审核。详见 [依赖与工具说明](.agents/skills/research-poster/references/dependencies-and-tooling.md)。
 
-## GitHub Pages
+## 架构
 
-仓库的 `.github/workflows/pages.yml` 会自动渲染源代码、生成 PDF/PPTX/缩略图、核验资产、构建网站，最后尝试部署到 Pages。首次启用仍需进入 **[Settings → Pages](https://github.com/1998x-stack/Research-Poster/settings/pages)**，在 **Build and deployment → Source** 选择 **GitHub Actions**。随后在 **Actions → Publish Research Poster gallery → Run workflow** 重新触发部署。
+~~~mermaid
+flowchart LR
+    A["论文 / DOI / PDF"] --> B["官方来源与版本核验"]
+    B --> C["主张—证据清单"]
+    C --> D["领域适配的研究叙事"]
+    D --> E["可编辑源 + SVG/PPTX/PDF/PNG"]
+    E --> F["自动预检 + 人工审核"]
+    F --> G["poster.json + 学科分类"]
+    G --> H["搜索索引 + GitHub Pages"]
+    F -->|不合格| D
+~~~
 
-预期地址：<https://1998x-stack.github.io/Research-Poster/>。只有实际访问成功才代表发布完成。
+核心目录：
 
-## 质量门槛
+~~~text
+.agents/skills/research-poster/
+  SKILL.md                   标准 Skill 入口
+  references/                科研、设计、领域策略、工程与 QA
+  assets/templates/          证据清单、版式线框、审核模板
+  requirements.txt           可选且可移植的渲染依赖
+  scripts/preflight.py       独立海报预检
+.codex/ .claude/ .opencode/ .pi/
+  skills/research-poster/    各 Agent 的薄兼容入口
+AGENTS.md                    全仓库的 Agent 协作、校验和安全规则
+catalog/taxonomy.json        学科与子领域分类依据
+posters/<领域>/<子领域>/<论文 slug>/
+  evidence.md / brief.md / poster.json
+  poster.svg / poster.pptx / poster.pdf / preview.png
+scripts/                      仓库专有的创建、渲染、验证、建站工具
+site/                         GitHub Pages 前端
+tests/                        自动化回归测试
+~~~
 
-主张必须有具体来源；实验数字必须匹配模型版本、数据集与基线；方法图不应遗漏关键模块；PDF 必须检查单页尺寸、可读性和文字溢出；需要保留版权说明并避免发布受限论文、用户隐私、token 和凭据。
+## 质量与发布标准
 
-项目代码、脚本和原创样式遵守 MIT License；原始论文的知识产权归论文作者及出版方所有。
+**科研正确性优先于视觉美观。** 所有数字都要对应明确论文版本和实验条件；不能靠夸张比例、裁剪坐标轴制造结果。所有技术图必须保留关键语义，实验与限制并列呈现，且保留独立可编辑源。
+
+正式发布前，需要完成 [审核清单](.agents/skills/research-poster/assets/templates/review-checklist.md)、[元数据校验](scripts/validate_catalog.py)、[产物预检](.agents/skills/research-poster/scripts/preflight.py)、PDF 打印检查以及网页桌面/移动端浏览检查。草稿 `status: draft` 不进入公开索引，`status: published` 才会参与生成。
+
+GitHub Actions 负责画廊构建和发布。首次使用时进入 **Settings → Pages → Build and deployment → Source: GitHub Actions**，并检查实际部署结果。预期地址为 [GitHub Pages 画廊](https://1998x-stack.github.io/Research-Poster/)；工作流存在不代表网站已成功上线。
+
+## 版权与贡献
+
+欢迎为计算机科学各研究方向贡献海报。请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 与 [AGENTS.md](AGENTS.md)。仓库原创代码、版式和模板采用 [MIT License](LICENSE)，但原始论文、图像和第三方材料仍归原权利人所有。不得默认重新发布受限论文 PDF、未公开稿件或没有授权的图表。
+
+**Attention Is All You Need 是第一张样例，而不是这个项目的终点。**

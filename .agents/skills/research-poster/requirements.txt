@@ -1,0 +1,5 @@
+# Optional PowerPoint poster authoring (Python 3.10+).
+# Site/catalog/preflight scripts use Python standard library only.
+# External rendering also requires OS-level LibreOffice and Poppler.
+python-pptx>=1.0,<2
+qrcode[pil]>=8,<9

@@ -1,111 +1,174 @@
-# Research Poster · Paper to Poster, by Design
+<div align="center">
 
-**[简体中文版](README.zh-CN.md)** · [Add a paper in one command](#add-a-new-paper-in-one-command)
+# Research Poster
 
-> **A reproducible computer-science research-poster studio, multi-agent skill, and browsable paper gallery.**
+### From complex papers to clear, verifiable visual arguments.
 
-[![Pages](https://github.com/1998x-stack/Research-Poster/actions/workflows/pages.yml/badge.svg)](https://github.com/1998x-stack/Research-Poster/actions/workflows/pages.yml)
-[![CI](https://github.com/1998x-stack/Research-Poster/actions/workflows/validate.yml/badge.svg)](https://github.com/1998x-stack/Research-Poster/actions/workflows/validate.yml)
-[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-0d9488)](https://agentskills.io/specification)
+**An open-source research-poster studio, multi-agent skill, and growing gallery of computer-science papers.**
 
-**[Explore the poster gallery](https://1998x-stack.github.io/Research-Poster/)** · [Skill](.agents/skills/research-poster/SKILL.md) · [Research references](.agents/skills/research-poster/references/) · [Categories](catalog/taxonomy.json) · [Contribute](CONTRIBUTING.md)
+[Explore the gallery](https://1998x-stack.github.io/Research-Poster/) · [Use the skill](.agents/skills/research-poster/SKILL.md) · [Browse the taxonomy](catalog/taxonomy.json) · [Contribute](CONTRIBUTING.md) · **[简体中文](README.zh-CN.md)**
 
-## Why this exists
+[![Validate posters](https://github.com/1998x-stack/Research-Poster/actions/workflows/validate.yml/badge.svg)](https://github.com/1998x-stack/Research-Poster/actions/workflows/validate.yml)
+[![Publish gallery](https://github.com/1998x-stack/Research-Poster/actions/workflows/pages.yml/badge.svg)](https://github.com/1998x-stack/Research-Poster/actions/workflows/pages.yml)
+[![Agent Skills](https://img.shields.io/badge/Agent_Skills-compatible-137F81)](https://agentskills.io/specification)
+[![License: MIT](https://img.shields.io/badge/Code-MIT-192C3D)](LICENSE)
 
-Great research posters are not condensed papers. They are **evidence-backed visual arguments**: a readable title, one memorable finding, a carefully redrawn method, a fair empirical comparison, a limitations box, and a traceable source. This repository converts this workflow into a reusable Agent Skill and a growing public collection of computer-science research posters.
+</div>
 
-**Pipeline:** Verify paper → Extract claims & numbers → Select visual narrative → Redraw architecture and evidence → Produce editable source → Export PDF/PPTX/preview → QA → Add metadata → Build searchable Pages gallery.
+---
 
-## Featured poster
+## Research deserves better than a wall of text
 
-**[Attention Is All You Need](posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/)** · Vaswani et al., NeurIPS 2017
+A useful research poster is **not a shortened PDF**. It makes one defensible argument at a glance, explains the mechanism in a well-labeled figure, and lets the reader inspect the evidence, assumptions, and limitations.
 
-- Main contribution: the Transformer replaces recurrence with attention in a sequence-to-sequence model.
-- Method: encoder–decoder stacks, self-/cross-attention, masking, and positional encoding.
-- Results: **28.4 BLEU** (WMT14 English→German) and **41.0 BLEU** (English→French), according to the *2017 proceedings version*, Table 2. A later arXiv revision reports 41.8; never silently mix versions.
-- The **original V2 poster source** is preserved as a reproducible, editable PowerPoint + printable PDF + web preview by the repository's generation workflow. The committed SVG serves as an immediate, no-build preview.
+**Research Poster** turns that editorial practice into a repeatable engineering workflow. It is designed for a **growing collection**, not a single Transformer demonstration: machine learning, computer vision, systems, security, theory, databases, HCI, robotics, and other computing disciplines share one evidence and publishing contract while retaining field-specific visual narratives.
 
-## One-prompt workflow
+| Research integrity | Editorial design | Reproducible artifacts | Discoverable knowledge |
+| :--- | :--- | :--- | :--- |
+| Claims traced to an exact paper version, page, table, and protocol | Layout selected to suit the paper—not a single mandatory template | Editable source, SVG, PPTX, printable PDF, preview, metadata | Taxonomy, searchable gallery, individual Pages URLs |
+| No invented metrics or misleading comparisons | Diagrams foreground method, results, or proof as appropriate | Automated catalog, asset preflight, and build checks | Add a paper without hand-editing website cards |
 
-Paste this into a compatible coding agent after cloning this repository:
+## A growing paper gallery
 
-```text
-Use the research-poster skill in .agents/skills/research-poster/SKILL.md.
-For the paper <PAPER_URL_OR_PDF>, verify the source and official results;
-select the correct category in catalog/taxonomy.json; prepare a
-claim/evidence ledger; design a compelling conference-quality poster;
-generate editable PPTX, print PDF and web thumbnail; add poster.json;
-run python scripts/validate_catalog.py and python scripts/build_site.py;
-and propose a reviewable commit/PR without overwriting previous posters.
-```
+<a href="https://1998x-stack.github.io/Research-Poster/"><img alt="Research Poster example: Attention Is All You Need" src="posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/preview.png" width="840"></a>
 
-**Skills**: Codex discovers `.agents/skills/research-poster/SKILL.md`; OpenCode also sees `.opencode/skills/`; Claude Code sees `.claude/skills/`; Pi sees `.pi/skills/`. A `.codex/` compatibility guide is included, but modern Codex project auto-discovery happens in `.agents/skills`.
+<sub>First published example: **Attention Is All You Need** (Vaswani et al., NeurIPS 2017). This is one case study, not the repository's scope. The poster uses the specified NeurIPS proceedings version; its reported WMT14 values should not be silently mixed with later arXiv revisions. [Source and evidence](posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/evidence.md) · [Editable PPTX / PDF / SVG](posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/)</sub>
 
-## Repository map
+New papers are organized in the [computing taxonomy](catalog/taxonomy.json) and appear in the gallery from their own `poster.json` files. An empty subject folder means **reserved category**, not a published poster.
 
-```text
-.agents/skills/research-poster/
-  SKILL.md                 # canonical end-to-end contract
-  references/              # sourcing, design, visualization, QA, publishing
-  assets/                  # reusable briefs and metadata templates
-.codex/ .claude/ .opencode/ .pi/
-  skills/research-poster/  # platform entrypoints
-catalog/taxonomy.json      # machine-readable CS taxonomy
-posters/<field>/<subfield>/<paper-slug>/
-  poster.json              # required, validated metadata
-  poster.svg               # versioned, universally viewable preview
-  make_poster.py           # optional reproducible render source
-  poster.pptx              # generated editable deliverable
-  poster.pdf               # generated print deliverable
-  preview.png              # generated raster thumbnail
-scripts/
-  build_site.py            # generates a searchable static gallery
-  validate_catalog.py      # taxonomy, uniqueness, security & asset checks
-  render_posters.py        # regenerates known source-backed posters
-site/                      # CSS, JS, HTML templates and artwork
-.github/workflows/         # CI validation and Pages publication
-```
+## One workflow, different research stories
 
-## Add a new paper in one command
+| Paper family | Primary visual | Evidence you must preserve |
+| --- | --- | --- |
+| Deep learning / computer vision | Architecture, training/inference path, ablations | Datasets, splits, baselines, model variant, compute |
+| Systems / networks / databases | Topology, hot path, trade-off curve | Hardware/workload, p50/p95/p99, failure modes |
+| Algorithms / theory / cryptography | Definition, invariant, proof idea or reduction | Assumptions, theorem scope, asymptotics, threat model |
+| HCI / accessibility | Study design, task flow, outcome plots | Participants, protocol, uncertainty, ethics and consent |
+| Robotics / embodied AI | Sensor–policy–action loop, real-world setup | Environment, success metric, baselines, safety bounds |
+| Interdisciplinary research | Domain process, method, validation | Domain-specific datasets, uncertainty, limitations |
 
-Run `python scripts/new_poster.py --help` to generate a non-destructive draft folder containing `poster.json`, `evidence.md` and `brief.md`. Choose a field and subfield from `catalog/taxonomy.json`. Drafts stay hidden until validated and published.
+See [paper archetypes](.agents/skills/research-poster/references/paper-archetypes.md), [visual design](.agents/skills/research-poster/references/visual-design.md), and the [editable layout wireframes](.agents/skills/research-poster/assets/templates/). **No layout is required for every paper.**
 
-## Adding a paper
+## Use it with an AI coding agent
 
-1. Check official proceedings and version-specific tables; create an evidence ledger.
-2. Choose a category/subcategory from `catalog/taxonomy.json`. If needed, add a category with an explanation.
-3. Create `posters/<field>/<subfield>/<slug>/poster.json` and source artwork. Do not overwrite an existing poster version.
-4. Produce SVG/web preview, PDF, and PPTX. Put source code and provenance in the paper folder.
-5. Run `python scripts/validate_catalog.py` then `python scripts/build_site.py --output _site`. Inspect the PDF at print size and mobile/desktop cards.
-6. Open a PR. The GitHub Actions Pages workflow rebuilds the catalog from `poster.json` files: **no hand-maintained card list**.
+The canonical, versioned skill lives at [`.agents/skills/research-poster/SKILL.md`](.agents/skills/research-poster/SKILL.md). Codex, Claude Code, OpenCode, and Pi have thin compatibility entrypoints; they all defer to the same instructions, sources, and quality gates.
 
-## Local preview
+**One-prompt workflow** — in a coding agent with this repository checked out:
 
-Requires Python 3.10+ (standard library for catalog/site; poster rendering adds `python-pptx`, `qrcode[pil]`, and LibreOffice).
+~~~text
+Read AGENTS.md and .agents/skills/research-poster/SKILL.md, including the
+references relevant to this paper. Turn <PAPER_URL_OR_LOCAL_PDF> into a
+conference-quality research poster. Verify the official source and its
+version; build evidence.md; choose a visual narrative appropriate to its
+research field; classify it in catalog/taxonomy.json; create a new,
+non-destructive paper folder with editable source, poster.svg, poster.pptx,
+poster.pdf, preview.png, and poster.json. Run the poster preflight, catalog
+validation, tests, and site build; visually inspect print and web outputs.
+Clearly report unsupported exports or unverified deployment. Prepare a
+reviewable change; do not overwrite existing posters.
+~~~
 
-```bash
+For installation in **another project**, copy the complete `.agents/skills/research-poster/` directory, not just `SKILL.md`; preserve `references/`, `scripts/` and `assets/templates/`. You may also read the skill directly from this repo instead. Tool availability and file-edit permissions depend on your coding agent.
+
+## Quick start
+
+**Requirements:** Python 3.10+ for the metadata/catalog/gallery toolchain; no third-party Python packages for those steps. Rendering PDF/PPTX additionally uses the [optional rendering dependencies](.agents/skills/research-poster/references/dependencies-and-tooling.md).
+
+~~~bash
+git clone https://github.com/1998x-stack/Research-Poster.git
+cd Research-Poster
+
+# Inspect available primary fields and subfields.
+cat catalog/taxonomy.json
+
+# Scaffold a draft; this never overwrites a paper and is not published.
+python scripts/new_poster.py \
+  --title "Example Research Paper" \
+  --category computer-systems --subcategory distributed-systems \
+  --year 2026 --venue "Example Conference" \
+  --authors "First Author; Second Author" \
+  --url "https://example.org/paper"
+
+# Validate and preview the current gallery locally.
 python scripts/validate_catalog.py
+python -m unittest discover -s tests -v
 python scripts/build_site.py --output _site
 python -m http.server 8000 --directory _site
-# open http://localhost:8000
-```
+~~~
 
-To render the seed PowerPoint, PDF and PNG, install dependencies in `requirements-render.txt`, then run `python scripts/render_posters.py`. GitHub Actions automates those steps on publication.
+After creating and rendering your own paper:
 
-## Deployment
+~~~bash
+# Optional rendering environment; LibreOffice and Poppler are OS packages.
+python -m pip install -r requirements-render.txt
+python scripts/render_posters.py
 
-The workflow in `.github/workflows/pages.yml` requests only the Pages deployment scopes needed for publishing. To activate the site, open **Settings → Pages → Build and deployment → Source: GitHub Actions**. The expected project-site URL is **https://1998x-stack.github.io/Research-Poster/**. A workflow existing in the repo does *not*, by itself, prove Pages is activated; check the deployment status in Actions/Settings.
+# Run the independent, portable artifact preflight on any paper directory.
+python .agents/skills/research-poster/scripts/preflight.py \
+  posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need --strict
 
-## Values and safeguards
+python scripts/validate_catalog.py --strict-assets
+python scripts/build_site.py --output _site
+~~~
 
-- **No invented claims:** figures, quotes and metrics must have source links, version and table/figure identifiers.
-- **No deceptive plots:** disclose axis limits, baselines, data transformations and important limitations.
-- **Editable and accessible:** save vector diagrams, text-accessible PDF, alt captions, contrast-tested figures.
-- **Safe publishing:** never commit private PDFs, unpublished datasets, API keys or copyrighted figures without rights. Redraw with attribution.
-- **Non-destructive:** each paper is independently versioned; existing posters are immutable without explicit review.
+`--strict` checks published artifacts and requires `pdfinfo` (Poppler) for a one-page PDF check; it **does not** replace a human print-size and cross-device review. The render pipeline currently supports paper folders containing `make_poster.py`; other authoring sources may need a dedicated renderer. Read [tooling details](.agents/skills/research-poster/references/dependencies-and-tooling.md).
 
-## Attribution
+## Architecture
 
-The demonstration summarizes *Attention Is All You Need* (Vaswani et al., NeurIPS 2017). Research claims and figures are credited to the original authors; poster layout and redraw are a separate educational reinterpretation. See the [provenance record](posters/artificial-intelligence/natural-language-processing/attention-is-all-you-need/poster.json).
+~~~mermaid
+flowchart LR
+    A["Published paper / DOI / PDF"] --> B["Source & version verification"]
+    B --> C["Claim–evidence ledger"]
+    C --> D["Domain-specific narrative + layout"]
+    D --> E["Editable source + poster outputs"]
+    E --> F["Artifact preflight + human QA"]
+    F --> G["poster.json + taxonomy"]
+    G --> H["Static catalog + GitHub Pages"]
+    F -->|issues| D
+~~~
 
-License: repository code, templates and original layouts MIT; individual paper copyrights and citations remain with their respective owners.
+~~~text
+.agents/skills/research-poster/
+├── SKILL.md                      # canonical agent contract
+├── references/                   # research, design, domain, QA, tooling, publishing
+├── assets/
+│   ├── poster.json.template      # metadata example
+│   ├── poster-brief.template.md  # legacy brief
+│   └── templates/                # claim ledger, review checklist, SVG wireframes
+├── requirements.txt              # optional, portable Python render dependencies
+└── scripts/preflight.py          # standalone stdlib-based artifact QA
+.codex/ .claude/ .opencode/ .pi/   # thin entrypoints; one source of truth
+AGENTS.md                         # repo-wide agent engineering and safety rules
+catalog/taxonomy.json             # primary field / subfield IDs
+posters/<field>/<subfield>/<slug>/
+├── evidence.md                   # versioned claim & citation ledger
+├── brief.md                      # design and narrative plan
+├── poster.json                   # validated gallery metadata
+├── make_poster.py                # optional reproducible authoring source
+└── poster.svg / poster.pptx / poster.pdf / preview.png
+scripts/                          # repository-specific scaffold, render, validate, build
+tests/                            # regression tests
+site/                             # dependency-light static website
+.github/workflows/                # CI and Pages build / deployment
+~~~
+
+## Definition of done
+
+A poster is publishable only when its paper identity and version are verified, its claims are traceable, its figures are technically faithful, its limitations are visible, and its web and print assets can be opened and inspected. A passing script is **necessary but not sufficient**.
+
+- **Science:** match each metric to a source version, dataset, protocol and baseline; include limitations and attribution.
+- **Design:** inspect poster at physical print scale and at gallery-thumbnail scale; no clipped text, tiny labels or misleading visual encodings.
+- **Engineering:** keep authoring source and exported assets together; validate metadata, links, archive formats and build output.
+- **Publishing:** only `status: published` enters the gallery; PRs must be reviewable and must not silently modify unrelated papers.
+
+Full gates: [SKILL.md](.agents/skills/research-poster/SKILL.md) · [quality checklist](.agents/skills/research-poster/assets/templates/review-checklist.md) · [contribution guide](CONTRIBUTING.md).
+
+## GitHub Pages and project status
+
+GitHub Actions rebuilds the index from `poster.json` records; no manual card registry. The publishing workflow also renders known Python-backed posters. To enable deployment, select **Settings → Pages → Build and deployment → GitHub Actions** and inspect the deployment run. The intended gallery URL is [1998x-stack.github.io/Research-Poster](https://1998x-stack.github.io/Research-Poster/); the presence of a workflow or a badge alone does not prove that the public site is live.
+
+## Attribution and license
+
+Repository code, original templates and original layouts are provided under [MIT](LICENSE). **Original research remains the intellectual property of its authors and publishers.** Poster interpretations must cite their sources; do not redistribute a publisher PDF, copyrighted diagram, private draft or unlicensed figure merely because it is available online.
+
+This is an evolving research-poster collection. **Transformer is the first example—not the destination.**
