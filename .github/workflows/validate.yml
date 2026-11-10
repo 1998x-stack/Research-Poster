@@ -1,0 +1,28 @@
+name: Validate posters
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python scripts/validate_catalog.py
+      - run: python scripts/build_site.py --output _site
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("_site/catalog.json").read_text())
+          assert data["total"] >= 1
+          for item in data["posters"]:
+              assert (Path("_site")/item["page"]/"index.html").exists()
+          print("Static catalog validated:",data["total"])
+          PY

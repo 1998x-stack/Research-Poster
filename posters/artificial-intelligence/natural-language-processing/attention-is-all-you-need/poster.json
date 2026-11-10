@@ -45,7 +45,10 @@
     }
   ],
   "assets": {
-    "svg": "poster.svg"
+    "svg": "poster.svg",
+    "pdf": "poster.pdf",
+    "pptx": "poster.pptx",
+    "preview": "preview.png"
   },
   "status": "published",
   "featured": true,

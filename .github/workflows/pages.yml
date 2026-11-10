@@ -1,0 +1,54 @@
+name: Publish Research Poster gallery
+on:
+  push:
+    branches: [main]
+    paths:
+      - "posters/**"
+      - "catalog/**"
+      - "scripts/**"
+      - "site/**"
+      - "requirements-render.txt"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: research-poster-pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install poster rendering tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libreoffice-impress poppler-utils
+          python -m pip install -r requirements-render.txt
+      - name: Build editable PPTX, print PDF and preview PNG
+        run: python scripts/render_posters.py
+      - name: Verify source and rendered assets
+        run: python scripts/validate_catalog.py --strict-assets
+      - name: Build the GitHub Pages gallery
+        run: python scripts/build_site.py --output _site
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://1998x-stack.github.io/Research-Poster/
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy GitHub Pages
+        uses: actions/deploy-pages@v4
