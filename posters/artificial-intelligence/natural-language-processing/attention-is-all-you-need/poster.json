@@ -1,0 +1,54 @@
+{
+  "id": "attention-is-all-you-need",
+  "title": "Attention Is All You Need",
+  "subtitle": "The Transformer architecture",
+  "authors": [
+    "Ashish Vaswani",
+    "Noam Shazeer",
+    "Niki Parmar",
+    "Jakob Uszkoreit",
+    "Llion Jones",
+    "Aidan N. Gomez",
+    "Łukasz Kaiser",
+    "Illia Polosukhin"
+  ],
+  "year": 2017,
+  "venue": "NeurIPS 2017",
+  "category": "artificial-intelligence",
+  "subcategory": "natural-language-processing",
+  "tags": [
+    "transformer",
+    "attention",
+    "deep-learning",
+    "sequence-to-sequence",
+    "machine-translation",
+    "foundational"
+  ],
+  "summary": "A Transformer-based encoder–decoder architecture uses multi-head attention, feed-forward blocks and positional encoding instead of recurrence in sequence transduction.",
+  "takeaway": "NO RECURRENCE. ALL ATTENTION. Sequence positions interact by attention and support parallel training.",
+  "method": "Six encoder layers and six decoder layers; scaled dot-product self-attention, masked decoder attention and encoder–decoder cross-attention.",
+  "limitations": "Full dense self-attention has quadratic pairwise token interactions, and the decoder still generates tokens autoregressively.",
+  "source": {
+    "url": "https://papers.nips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf",
+    "version": "NeurIPS 2017 proceedings, Table 2 (EN–FR 41.0; later arXiv revisions may differ)",
+    "citation": "Vaswani, A., et al. (2017). Attention Is All You Need. Advances in Neural Information Processing Systems 30.",
+    "arxiv": "https://arxiv.org/abs/1706.03762"
+  },
+  "evidence": [
+    {
+      "claim": "WMT14 English–German Transformer (big) 28.4 BLEU",
+      "where": "NeurIPS 2017 proceedings, Table 2"
+    },
+    {
+      "claim": "WMT14 English–French Transformer (big) 41.0 BLEU",
+      "where": "NeurIPS 2017 proceedings, Table 2"
+    }
+  ],
+  "assets": {
+    "svg": "poster.svg"
+  },
+  "status": "published",
+  "featured": true,
+  "added": "2026-11-10",
+  "design_version": "v2 modern hybrid"
+}
