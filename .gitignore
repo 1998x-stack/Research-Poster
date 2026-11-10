@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+_site/
+tmp/
+*.log
+.pytest_cache/
+node_modules/
+# Render outputs belong in each poster folder when explicitly generated or published.

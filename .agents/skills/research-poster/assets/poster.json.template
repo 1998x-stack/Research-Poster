@@ -1,0 +1,33 @@
+{
+  "id": "paper-slug",
+  "title": "Paper title",
+  "subtitle": "One-line contribution",
+  "authors": [
+    "First Last"
+  ],
+  "year": 2026,
+  "venue": "Venue",
+  "category": "artificial-intelligence",
+  "subcategory": "natural-language-processing",
+  "tags": [
+    "example"
+  ],
+  "summary": "A factual abstract-level summary.",
+  "takeaway": "One evidence-backed central insight.",
+  "method": "How the mechanism works.",
+  "limitations": "Important caveat.",
+  "source": {
+    "url": "https://example.org/paper",
+    "version": "proceedings",
+    "citation": "Surname et al. (2026). Paper title. Venue."
+  },
+  "assets": {
+    "svg": "poster.svg",
+    "pdf": "poster.pdf",
+    "pptx": "poster.pptx",
+    "preview": "preview.png"
+  },
+  "status": "draft",
+  "featured": false,
+  "added": "2026-11-10"
+}

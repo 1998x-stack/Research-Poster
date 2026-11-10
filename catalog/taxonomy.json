@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "description": "Canonical research-poster subject taxonomy",
+  "categories": [
+    {
+      "id": "artificial-intelligence",
+      "name": "Artificial Intelligence",
+      "description": "language, perception, agents and reasoning",
+      "subfields": [
+        {
+          "id": "natural-language-processing",
+          "name": "Natural Language Processing"
+        },
+        {
+          "id": "computer-vision",
+          "name": "Computer Vision"
+        },
+        {
+          "id": "generative-models",
+          "name": "Generative Models"
+        },
+        {
+          "id": "reinforcement-learning",
+          "name": "Reinforcement Learning"
+        },
+        {
+          "id": "knowledge-representation",
+          "name": "Knowledge & Reasoning"
+        }
+      ]
+    },
+    {
+      "id": "machine-learning",
+      "name": "Machine Learning",
+      "description": "foundations, learning systems and optimization",
+      "subfields": [
+        {
+          "id": "foundations",
+          "name": "Learning Foundations"
+        },
+        {
+          "id": "optimization",
+          "name": "Optimization"
+        },
+        {
+          "id": "representation-learning",
+          "name": "Representation Learning"
+        },
+        {
+          "id": "robustness-and-interpretability",
+          "name": "Robustness & Interpretability"
+        }
+      ]
+    },
+    {
+      "id": "algorithms-and-theory",
+      "name": "Algorithms & Theory",
+      "description": "algorithm design, complexity and formal theory",
+      "subfields": [
+        {
+          "id": "algorithms",
+          "name": "Algorithms"
+        },
+        {
+          "id": "complexity-theory",
+          "name": "Complexity Theory"
+        },
+        {
+          "id": "cryptography",
+          "name": "Cryptography"
+        },
+        {
+          "id": "formal-methods",
+          "name": "Formal Methods"
+        }
+      ]
+    },
+    {
+      "id": "computer-systems",
+      "name": "Computer Systems",
+      "description": "architecture, OS, distributed and cloud systems",
+      "subfields": [
+        {
+          "id": "computer-architecture",
+          "name": "Computer Architecture"
+        },
+        {
+          "id": "operating-systems",
+          "name": "Operating Systems"
+        },
+        {
+          "id": "distributed-systems",
+          "name": "Distributed Systems"
+        },
+        {
+          "id": "cloud-and-edge",
+          "name": "Cloud & Edge Computing"
+        }
+      ]
+    },
+    {
+      "id": "data-and-information",
+      "name": "Data & Information",
+      "description": "data management and retrieval",
+      "subfields": [
+        {
+          "id": "databases",
+          "name": "Databases"
+        },
+        {
+          "id": "information-retrieval",
+          "name": "Information Retrieval"
+        },
+        {
+          "id": "data-mining",
+          "name": "Data Mining"
+        },
+        {
+          "id": "knowledge-graphs",
+          "name": "Knowledge Graphs"
+        }
+      ]
+    },
+    {
+      "id": "networks",
+      "name": "Networks",
+      "description": "protocols, wireless, and internet measurement",
+      "subfields": [
+        {
+          "id": "computer-networks",
+          "name": "Computer Networks"
+        },
+        {
+          "id": "wireless-and-mobile",
+          "name": "Wireless & Mobile"
+        },
+        {
+          "id": "network-security",
+          "name": "Network Security"
+        }
+      ]
+    },
+    {
+      "id": "security-and-privacy",
+      "name": "Security & Privacy",
+      "description": "systems security, privacy and trustworthy computing",
+      "subfields": [
+        {
+          "id": "systems-security",
+          "name": "Systems Security"
+        },
+        {
+          "id": "privacy",
+          "name": "Privacy"
+        },
+        {
+          "id": "applied-cryptography",
+          "name": "Applied Cryptography"
+        }
+      ]
+    },
+    {
+      "id": "software-engineering",
+      "name": "Software Engineering",
+      "description": "programming languages, development and verification",
+      "subfields": [
+        {
+          "id": "programming-languages",
+          "name": "Programming Languages"
+        },
+        {
+          "id": "software-testing",
+          "name": "Software Testing"
+        },
+        {
+          "id": "developer-tools",
+          "name": "Developer Tools"
+        },
+        {
+          "id": "program-analysis",
+          "name": "Program Analysis"
+        }
+      ]
+    },
+    {
+      "id": "human-computer-interaction",
+      "name": "Human–Computer Interaction",
+      "description": "interaction, accessibility and empirical user studies",
+      "subfields": [
+        {
+          "id": "interaction-design",
+          "name": "Interaction Design"
+        },
+        {
+          "id": "accessibility",
+          "name": "Accessibility"
+        },
+        {
+          "id": "user-studies",
+          "name": "User Studies"
+        }
+      ]
+    },
+    {
+      "id": "graphics-and-visualization",
+      "name": "Graphics & Visualization",
+      "description": "rendering, modeling and scientific visualization",
+      "subfields": [
+        {
+          "id": "computer-graphics",
+          "name": "Computer Graphics"
+        },
+        {
+          "id": "visualization",
+          "name": "Visualization"
+        },
+        {
+          "id": "augmented-and-virtual-reality",
+          "name": "AR / VR"
+        }
+      ]
+    },
+    {
+      "id": "robotics",
+      "name": "Robotics",
+      "description": "embodied intelligence, planning and control",
+      "subfields": [
+        {
+          "id": "robot-perception",
+          "name": "Robot Perception"
+        },
+        {
+          "id": "planning-and-control",
+          "name": "Planning & Control"
+        },
+        {
+          "id": "embodied-ai",
+          "name": "Embodied AI"
+        }
+      ]
+    },
+    {
+      "id": "interdisciplinary",
+      "name": "Interdisciplinary Computing",
+      "description": "computing across science and society",
+      "subfields": [
+        {
+          "id": "computational-biology",
+          "name": "Computational Biology"
+        },
+        {
+          "id": "scientific-computing",
+          "name": "Scientific Computing"
+        },
+        {
+          "id": "computing-and-society",
+          "name": "Computing & Society"
+        }
+      ]
+    }
+  ]
+}
