@@ -18,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,6 +32,17 @@ jobs:
           python -m pip install -r requirements-render.txt
       - name: Build editable PPTX, print PDF and preview PNG
         run: python scripts/render_posters.py
+      - name: Version generated poster files in the repository
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          find posters -type f \( -name "poster.pptx" -o -name "poster.pdf" -o -name "preview.png" \) -print0 | xargs -0 -r git add --
+          if ! git diff --cached --quiet; then
+            git commit -m "build: archive reproducible poster assets [skip ci]"
+            git push origin HEAD:main
+          fi
       - name: Verify source and rendered assets
         run: python scripts/validate_catalog.py --strict-assets
       - name: Build the GitHub Pages gallery
