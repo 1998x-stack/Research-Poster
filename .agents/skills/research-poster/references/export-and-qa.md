@@ -1,22 +1,22 @@
 # Artifact generation, print quality and acceptance checks
 
 ## Required artifact checklist
-- \`poster.json\` with source/version and factual claims.
-- \`poster.svg\` semantic, navigable preview (or accessible raster preview).
-- \`poster.pptx\` editable PowerPoint when supported.
-- \`poster.pdf\` one-page print PDF, appropriate dimensions and embedded fonts.
-- \`preview.png\` or WebP screenshot/thumbnail.
+- `poster.json` with source/version and factual claims.
+- `poster.svg` semantic, navigable preview (or accessible raster preview).
+- `poster.pptx` editable PowerPoint when supported.
+- `poster.pdf` one-page print PDF, appropriate dimensions and embedded fonts.
+- `preview.png` or WebP screenshot/thumbnail.
 - Render source (Python, LaTeX, PPTX, etc.) for reproducibility.
 
 ## Recommended authoring
 Use PowerPoint vector primitives or source SVG; avoid rasterizing figures to look editable. Convert PPTX with LibreOffice, render PDF with pdfium/Poppler/PyMuPDF. Typical local seed command:
 
-\`\`\`bash
+```bash
 python -m pip install -r requirements-render.txt
 python scripts/render_posters.py
 python scripts/validate_catalog.py
 python scripts/build_site.py --output _site
-\`\`\`
+```
 
 ## Programmatic QA
 1. Open PDF: check exactly one page, expected aspect/size (48×36 in → 3456×2592 pt), extracted text and images not blank.

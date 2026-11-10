@@ -4,7 +4,7 @@
 Preserve *semantics* first: nodes, edges, direction, multiplicity, masking, normalization, residuals, ordering. Prefer editable vector shapes and a single illustrative code path. Label visual simplifications.
 
 ## Common CS diagram grammar
-- **Neural architectures**: data-flow arrows, repeated \`×N\` blocks, attention/masks, embeddings, norm, logits.
+- **Neural architectures**: data-flow arrows, repeated `×N` blocks, attention/masks, embeddings, norm, logits.
 - **Algorithms**: definition → invariant → complexity → proof sketch; complexity claims require assumptions (sequence length n, width d).
 - **Systems**: topology, boundary, hot path, failure modes, throughput/latency units, percentiles.
 - **Security**: threat model, attacker capabilities, trust boundary, guarantees and exclusions.
@@ -14,7 +14,7 @@ Preserve *semantics* first: nodes, edges, direction, multiplicity, masking, norm
 - Name task, test split, metric, direction, baseline and source table.
 - Show actual data and axis origin; explain truncation. Use error bars only when provided.
 - Do not visually imply significance from one point estimate.
-- Distinguish \`single\`, \`ensemble\`, \`base\`, \`big\`, pretraining and fine-tuning budgets.
+- Distinguish `single`, `ensemble`, `base`, `big`, pretraining and fine-tuning budgets.
 - State computational complexity with symbols and assumptions. For vanilla dense self-attention: O(n²d) time and O(n²) attention score memory for a head, not an unqualified O(n²) end-to-end model claim.
 
 ## Transformer illustration checks

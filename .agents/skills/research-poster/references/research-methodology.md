@@ -16,7 +16,7 @@ Capture: title, complete author list, venue, year, DOI or stable official URL, p
 | C02 | 28.4 BLEU, WMT14 EN–DE | Official 2017 paper, Table 2 | Proceedings | direct | Transformer (big) |
 | C03 | 41.0 BLEU, WMT14 EN–FR | Official 2017 paper, Table 2 | Proceedings | direct | later arXiv text differs |
 
-Keep the ledger as \`evidence.md\` in the poster folder, or include equivalent references in structured metadata.
+Keep the ledger as `evidence.md` in the poster folder, or include equivalent references in structured metadata.
 
 ## Summary workflow
 Research question → prior bottleneck → precise contribution → high-level intuition → technical method → experimental conditions → measured results → limitations → lasting impact *only if sourced*.

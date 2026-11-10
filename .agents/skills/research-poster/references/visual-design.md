@@ -10,7 +10,7 @@ Title → 8-second takeaway → Problem → Why it matters → Method (dominant 
 - Visual hierarchy: title ~95–120 pt; key takeaway 40–55 pt; section 28–36 pt; core content 20–28 pt; footnote 14–18 pt at full poster size.
 - Body paragraphs: 30–45 words max; switch to labeled diagrams, captions and cards.
 - Strong white/near-white body; dark headline panel; max 2 accent hues plus semantic warning hue.
-- Recommended sample palette: midnight \`#112B3C\`, ink \`#173044\`, teal \`#0F968E\`, coral \`#FF815C\`, paper \`#F6F8F7\`.
+- Recommended sample palette: midnight `#112B3C`, ink `#173044`, teal `#0F968E`, coral `#FF815C`, paper `#F6F8F7`.
 - Reserve at least 20–30% empty area; avoid decorative outlines around every box.
 - Ensure at least WCAG AA contrast when practical; never encode meaning by color alone.
 
